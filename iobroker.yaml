@@ -1,0 +1,193 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: iobroker
+  namespace: iobroker
+spec:
+  serviceName: iobroker
+  selector:
+    matchLabels:
+      app: iobroker
+  replicas: 1
+  template:
+    metadata:
+      name: iobroker
+      labels:
+        app: iobroker
+    spec:
+      hostname: iobroker
+      tolerations:
+      #- effect: NoSchedule
+      #  key: node-role.kubernetes.io/master
+      containers:
+      - name: iobroker
+        image: buanet/iobroker:latest
+        imagePullPolicy: Always
+
+          #command: 
+          #- sh 
+          #- -c 
+          #- while [ 1 ]; do sleep 10;done 
+        resources:
+          requests:
+            memory: "1024Mi"
+            cpu: "50m"
+        ports:
+        - containerPort: 8081  #original admin
+        - containerPort: 8082  #original vis
+        - containerPort: 8084  #original io sockets
+        - containerPort: 8087  #original SimpleAPI
+        - containerPort: 1883  #original mqtt
+        - containerPort: 8400  #original jarvis
+        - containerPort: 30888 #original nodered
+        - containerPort: 32001 #hrpc.0
+        - containerPort: 8701  #hrpc.1
+        - containerPort: 32010 #hrpc.2
+        - containerPort: 30292 #hrpc.3
+        - containerPort: 30004 #hrpc.4
+        - containerPort: 30005 #hrpc.5
+        - containerPort: 30081 #Reconfigured admin
+        - containerPort: 30082 #Reconfigured vis
+        - containerPort: 30087 #Reconfigured SimpleAPI
+        - containerPort: 30170 #reconfigired mqt
+        livenessProbe:
+          tcpSocket:
+            port: 30081
+          initialDelaySeconds: 600 # 10 minutes
+          timeoutSeconds: 5
+          failureThreshold: 3 # 2 minutes
+        env:
+        - name: TZ
+          value: Europe/Berlin
+            #        - name: IOB_STATESDB_HOST
+            #          value: rdis-master
+            #        - name: IOB_STATESDB_PORT
+            #          value: "6379"
+            #        - name: IOB_STATESDB_TYPE
+            #          value: redis
+            #        - name: IOB_STATESDB_PASS
+            #          value: yPRzQYIlOY
+        - name:  PACKAGES
+          value: cifs-utils redis-server 
+        volumeMounts:
+        - mountPath: /opt/iobroker/
+          name: pv-iobrokerdata
+        - mountPath: /opt/iobroker/backups
+          name: pv-backup    
+        - mountPath: /opt/scripts/.docker_config/
+          name: health
+        securityContext:
+          capabilities:
+            add:
+            - SYS_ADMIN
+            - DAC_READ-SEARCH 
+            - NET_ADMIN
+      volumes:
+        - name: pv-iobrokerdata
+          persistentVolumeClaim:
+           claimName: iobrokerdata
+        - name: pv-backup
+          persistentVolumeClaim:
+           claimName: backup
+        - name: health
+          emptyDir: {}
+          #hostPath:
+              #path: "/opt/scripts"
+              #glusterfs:
+              #endpoints: heketi-storage-endpoints
+              #path: iobroker
+              #- name: scripts
+              #emptyDir: {}
+
+---
+# -------------------- Service ------------------- #
+
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: iobroker
+  name: iobroker-svc
+  namespace: iobroker
+spec:
+  ports:
+  - name: admin
+    port: 30081
+    targetPort: 30081
+    nodePort: 30081
+  - name: vis
+    port: 30082
+    targetPort: 30082
+    nodePort: 30082
+  - name: iosocket
+    port: 30084
+    targetPort: 30084
+    nodePort: 30084
+  - name: api
+    port: 30087
+    targetPort: 30087
+    nodePort: 30087
+  - name: rfdclient0
+    port: 32001
+    nodePort: 32001
+  - name: rfdclient1
+    port: 8701
+    targetPort: 8701
+    nodePort: 30701
+  - name: rfdclient2
+    port: 32010
+    nodePort: 32010
+  - name: rfdclient3
+    port: 30292
+    targetPort: 30292
+    nodePort: 30292
+  - name: mqt
+    port: 30170
+    nodePort: 30170
+  - name: admin-org
+    port: 8081
+    targetPort: 8081
+  - name: vis-org
+    port: 8082
+    targetPort: 8082
+  - name: iosocket-org
+    port: 8084
+    targetPort: 8084
+  - name: mqt-org
+    port: 1883
+    targetPort: 1883
+  - name: jarvis
+    port: 8400
+    targetPort: 8400
+  - name: nodered
+    port: 30888
+    targetPort: 30888
+
+  type: NodePort
+  selector:
+    app: iobroker
+
+---
+
+# ------------------- Ingress ------------------- #
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: iobroker-ingress
+  namespace: iobroker
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16,10.0.0.0/8"
+spec:
+  rules:
+  - host: linux-2
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: iobroker-svc
+            port:
+              number: 30081
