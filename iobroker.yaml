@@ -14,6 +14,8 @@ spec:
       name: iobroker
       labels:
         app.kubernetes.io/managed-by: Helm
+        meta.helm.sh/release-name: iobroker
+        meta.helm.sh/release-namespace: default
         app: iobroker
     spec:
       hostname: iobroker
