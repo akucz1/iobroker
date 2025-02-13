@@ -13,6 +13,7 @@ spec:
     metadata:
       name: iobroker
       labels:
+        app.kubernetes.io/managed-by: Helm
         app: iobroker
     spec:
       hostname: iobroker
@@ -21,8 +22,8 @@ spec:
       #  key: node-role.kubernetes.io/master
       containers:
       - name: iobroker
-        image: buanet/iobroker:latest
-        imagePullPolicy: Always
+        image: buanet/iobroker:latest-v10
+        imagePullPolicy: IfNotPresent
 
           #command: 
           #- sh 
