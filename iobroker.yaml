@@ -72,6 +72,8 @@ spec:
             #          value: yPRzQYIlOY
         - name:  PACKAGES
           value: cifs-utils redis-server 
+        - name:  IOB_ADMINPORT
+          value: 30081
         volumeMounts:
         - mountPath: /opt/iobroker/
           name: pv-iobrokerdata
