@@ -72,8 +72,6 @@ spec:
             #          value: yPRzQYIlOY
         - name:  PACKAGES
           value: cifs-utils redis-server 
-        - name:  IOB_ADMINPORT
-          value: "30081"
         volumeMounts:
         - mountPath: /opt/iobroker/
           name: pv-iobrokerdata
@@ -118,7 +116,7 @@ spec:
   ports:
   - name: admin
     port: 30081
-    targetPort: 30081
+    targetPort: 8081
     nodePort: 30081
   - name: vis
     port: 30082
