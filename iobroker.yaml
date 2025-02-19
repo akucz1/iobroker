@@ -55,7 +55,7 @@ spec:
         - containerPort: 30170 #reconfigired mqt
         livenessProbe:
           tcpSocket:
-            port: 30081
+            port: 8081
           initialDelaySeconds: 600 # 10 minutes
           timeoutSeconds: 5
           failureThreshold: 3 # 2 minutes
@@ -120,7 +120,7 @@ spec:
     nodePort: 30081
   - name: vis
     port: 30082
-    targetPort: 30082
+    targetPort: 9082
     nodePort: 30082
   - name: iosocket
     port: 30084
@@ -147,12 +147,6 @@ spec:
   - name: mqt
     port: 30170
     nodePort: 30170
-  - name: admin-org
-    port: 8081
-    targetPort: 8081
-  - name: vis-org
-    port: 8082
-    targetPort: 8082
   - name: iosocket-org
     port: 8084
     targetPort: 8084
