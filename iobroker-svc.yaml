@@ -6,46 +6,8 @@ metadata:
     management.cattle.io/ui-managed: 'true'
     traefik.ingress.kubernetes.io/service.serversscheme: https
     traefik.ingress.kubernetes.io/service.serverstransport: iobroker-skipverify@kubernetescrd
-  creationTimestamp: '2025-03-04T13:12:04Z'
-  managedFields:
-    - apiVersion: v1
-      fieldsType: FieldsV1
-      fieldsV1:
-        f:metadata:
-          f:annotations:
-            .: {}
-            f:field.cattle.io/targetWorkloadIds: {}
-            f:management.cattle.io/ui-managed: {}
-            f:traefik.ingress.kubernetes.io/service.serversscheme: {}
-            f:traefik.ingress.kubernetes.io/service.serverstransport: {}
-        f:spec:
-          f:internalTrafficPolicy: {}
-          f:ports:
-            .: {}
-            k:{"port":8081,"protocol":"TCP"}:
-              .: {}
-              f:name: {}
-              f:port: {}
-              f:protocol: {}
-              f:targetPort: {}
-            k:{"port":8082,"protocol":"TCP"}:
-              .: {}
-              f:name: {}
-              f:port: {}
-              f:protocol: {}
-              f:targetPort: {}
-            k:{"port":30888,"protocol":"TCP"}:
-              .: {}
-              f:name: {}
-              f:port: {}
-              f:protocol: {}
-              f:targetPort: {}
-          f:selector: {}
-          f:sessionAffinity: {}
-          f:type: {}
-  name: iobroker
+  name: iobroker-ingress-svc
   namespace: iobroker
-  uid: 63896fcd-ca06-457b-a755-f59491d1ab2d
 spec:
   internalTrafficPolicy: Cluster
   ipFamilies:
