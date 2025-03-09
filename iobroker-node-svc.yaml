@@ -1,0 +1,64 @@
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: iobroker
+  name: iobroker-node-svc
+  namespace: iobroker
+spec:
+  ports:
+  - name: admin
+    port: 30081
+    targetPort: 30081
+    nodePort: 30081
+  - name: vis
+    port: 30082
+    targetPort: 30082
+    nodePort: 30082
+  - name: iosocket
+    port: 30084
+    targetPort: 30084
+    nodePort: 30084
+  - name: api
+    port: 30087
+    targetPort: 30087
+    nodePort: 30087
+  - name: rfdclient0
+    port: 32001
+    nodePort: 32001
+  - name: rfdclient1
+    port: 8701
+    targetPort: 8701
+    nodePort: 30701
+  - name: rfdclient2
+    port: 32010
+    nodePort: 32010
+  - name: rfdclient3
+    port: 30292
+    targetPort: 30292
+    nodePort: 30292
+  - name: mqt
+    port: 30170
+    nodePort: 30170
+  - name: admin-org
+    port: 8081
+    targetPort: 8081
+    - name: vis-org
+    port: 8082
+    targetPort: 8082
+  - name: iosocket-org
+    port: 8084
+    targetPort: 8084
+  - name: mqt-org
+    port: 1883
+    targetPort: 1883
+  - name: jarvis
+    port: 8400
+    targetPort: 8400
+  - name: nodered
+    port: 30888
+    targetPort: 30888
+
+  type: NodePort
+  selector:
+    app: iobroker
