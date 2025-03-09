@@ -15,15 +15,12 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: 'true'
     objectset.rio.cattle.io/id: default-iobroker-cattle-fleet-local-system
     traefik.port: '443'
-  creationTimestamp: '2025-03-03T16:41:07Z'
   generation: 32
   labels:
     app.kubernetes.io/managed-by: Helm
     objectset.rio.cattle.io/hash: b49a838027d4604797930aa9424971cc9bcb5336
   name: iobroker-ingress
   namespace: iobroker
-  resourceVersion: '10406460'
-  uid: e0b2281d-3172-4cbb-9704-c307df3e92a3
 spec:
   ingressClassName: traefik
   rules:
