@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["iobroker/iobroker"]'
+    management.cattle.io/ui-managed: 'true'
+    traefik.ingress.kubernetes.io/service.serversscheme: https
+    traefik.ingress.kubernetes.io/service.serverstransport: iobroker-skipverify@kubernetescrd
+  name: iobroker-ingress-svc
+  namespace: iobroker
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: admin
+      port: 8081
+      protocol: TCP
+      targetPort: 8081
+    - name: web
+      port: 8082
+      protocol: TCP
+      targetPort: 8082
+    - name: red
+      port: 30888
+      protocol: TCP
+      targetPort: 30888
+  selector:
+    app: iobroker
+  sessionAffinity: None
+  type: ClusterIP
