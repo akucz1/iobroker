@@ -34,6 +34,14 @@ spec:
                   number: 8081
             path: /
             pathType: Prefix
+      paths:
+          - backend:
+              service:
+                name: iobroker-ingress-svc
+                port:
+                  number: 8082
+            path: /iqontrol
+            pathType: Prefix
   tls:
     - hosts:
         - linux-2.fritz.box
