@@ -9,11 +9,11 @@ spec:
   ports:
   - name: admin
     port: 30081
-    targetPort: 30081
+    targetPort: 8081
     nodePort: 30081
   - name: vis
     port: 30082
-    targetPort: 30082
+    targetPort: 8082
     nodePort: 30082
   - name: iosocket
     port: 30084
