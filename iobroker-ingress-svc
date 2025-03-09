@@ -9,10 +9,6 @@ metadata:
   name: iobroker-ingress-svc
   namespace: iobroker
 spec:
-  internalTrafficPolicy: Cluster
-  ipFamilies:
-    - IPv4
-  ipFamilyPolicy: SingleStack
   ports:
     - name: admin
       port: 8081
