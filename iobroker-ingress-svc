@@ -8,7 +8,7 @@ metadata:
     traefik.ingress.kubernetes.io/service.serverstransport: iobroker-skipverify@kubernetescrd
   name: iobroker-ingress-svc
   namespace: iobroker
-spec:
+spec:  
   ports:
     - name: admin
       port: 8081
