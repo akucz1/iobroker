@@ -1,0 +1,49 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: selfsigned-issuer
+    field.cattle.io/publicEndpoints: >-
+      [{"addresses":["192.168.0.11","192.168.0.6","192.168.0.8"],"port":443,"protocol":"HTTPS","serviceName":"iobroker:iobroker-ingress-svc","ingressName":"iobroker:iobroker-ingress","hostname":"linux-2.fritz.box","path":"/","allNodes":false}]
+    ingress.kubernetes.io/whitelist-source-range: 192.168.0.0/16,10.0.0.0/8
+    kubectl.kubernetes.io/last-applied-configuration: >-
+      {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{"cert-manager.io/cluster-issuer":"selfsigned-issuer","kubernetes.io/ingress.class":"traefik"},"name":"iobroker-svc1","namespace":"iobroker"},"spec":{"ingressClassName":"traefik","rules":[{"host":"linux-2.fritz.box","http":{"paths":[{"backend":{"service":{"name":"iobroker-svc","port":{"number":8081}}},"path":"/","pathType":"Prefix"}]}}],"tls":[{"hosts":["linux-2.fritz.box"],"secretName":"iobroker-tls"}]}}
+    kubernetes.io/ingress.class: traefik
+    meta.helm.sh/release-name: iobroker
+    meta.helm.sh/release-namespace: default
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+    objectset.rio.cattle.io/id: default-iobroker-cattle-fleet-local-system
+    traefik.port: '443'
+  creationTimestamp: '2025-03-03T16:41:07Z'
+  generation: 32
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    objectset.rio.cattle.io/hash: b49a838027d4604797930aa9424971cc9bcb5336
+  name: iobroker-ingress
+  namespace: iobroker
+  resourceVersion: '10406460'
+  uid: e0b2281d-3172-4cbb-9704-c307df3e92a3
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: linux-2.fritz.box
+      http:
+        paths:
+          - backend:
+              service:
+                name: iobroker-ingress-svc
+                port:
+                  number: 8081
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - linux-2.fritz.box
+      secretName: iobroker-tls
+status:
+  loadBalancer:
+    ingress:
+      - ip: 192.168.0.11
+      - ip: 192.168.0.6
+      - ip: 192.168.0.8
