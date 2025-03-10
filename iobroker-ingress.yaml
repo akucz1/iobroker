@@ -20,7 +20,7 @@ spec:
                   number: 8081
             path: /
             pathType: Prefix
-          -backend:
+        - backend:
               service:
                 name: iobroker-ingress-svc
                 port:
