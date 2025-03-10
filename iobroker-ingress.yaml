@@ -1,4 +1,7 @@
-apiVersion: networking.k8s.io/v1                                                                                        kind: Ingress                                                                                                           metadata:                                                                                                                 annotations:                                                                                                              field.cattle.io/publicEndpoints: >-                                                                                       [{"addresses":["192.168.0.11","192.168.0.6","192.168.0.8"],"port":80,"protocol":"HTTP","serviceName":"iobroker:io>    ingress.kubernetes.io/whitelist-source-range: 192.168.0.0/16,10.0.0.0/8
+apiVersion: networking.k8s.io/v1  
+kind: Ingress
+metadata:
+annotations:
     meta.helm.sh/release-name: iobroker
     meta.helm.sh/release-namespace: iobroker
     nginx.ingress.kubernetes.io/rewrite-target: /
@@ -6,7 +9,6 @@ apiVersion: networking.k8s.io/v1                                                
     objectset.rio.cattle.io/id: default-iobroker-cattle-fleet-local-system
   labels:
     app.kubernetes.io/managed-by: Helm
-    objectset.rio.cattle.io/hash: b49a838027d4604797930aa9424971cc9bcb5336
       managedFields:
     - apiVersion: networking.k8s.io/v1
       fieldsType: FieldsV1
@@ -15,36 +17,7 @@ apiVersion: networking.k8s.io/v1                                                
           f:loadBalancer:
             f:ingress: {}
       manager: traefik
-      operation: Update
-      subresource: status
-      time: '2025-03-09T21:32:51Z'
     - apiVersion: networking.k8s.io/v1
-      fieldsType: FieldsV1
-      fieldsV1:
-        f:metadata:
-          f:annotations:
-            .: {}
-            f:ingress.kubernetes.io/whitelist-source-range: {}
-            f:meta.helm.sh/release-name: {}
-            f:meta.helm.sh/release-namespace: {}
-            f:nginx.ingress.kubernetes.io/rewrite-target: {}
-            f:nginx.ingress.kubernetes.io/ssl-redirect: {}
-            f:objectset.rio.cattle.io/id: {}
-          f:labels:
-            .: {}
-            f:app.kubernetes.io/managed-by: {}
-            f:objectset.rio.cattle.io/hash: {}
-      manager: fleetagent
-      operation: Update
-      time: '2025-03-09T21:59:23Z'
-         - apiVersion: networking.k8s.io/v1
-      fieldsType: FieldsV1
-      fieldsV1:
-        f:metadata:
-          f:annotations:
-            f:field.cattle.io/publicEndpoints: {}
-        f:spec:
-          f:rules: {}
       manager: rancher
   name: iobroker-ingress
   namespace: iobroker
