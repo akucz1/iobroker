@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1
+faultapiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: iobroker-ingress
@@ -6,7 +6,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: "selfsigned-issuer"
     meta.helm.sh/release-name: iobroker
-    meta.helm.sh/release-namespace: iobroker
+    meta.helm.sh/release-namespace: default
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16,10.0.0.0/8"
