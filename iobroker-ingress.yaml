@@ -1,43 +1,13 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  annotations:
-    field.cattle.io/publicEndpoints: >-
-      [{"addresses":["192.168.0.11","192.168.0.6","192.168.0.8"],"port":80,"protocol":"HTTP","serviceName":"iobroker:iobroker-ingress-svc","ingressName":"iobroker:iobroker-ingress","hostname":"linux-2.fritz.box","path":"/","allNodes":false},{"addresses":["192.168.0.11","192.168.0.6","192.168.0.8"],"port":80,"protocol":"HTTP","serviceName":"iobroker:iobroker-ingress-svc","ingressName":"iobroker:iobroker-ingress","hostname":"linux-2.fritz.box","path":"/iqontrol","allNodes":false}]
-    ingress.kubernetes.io/whitelist-source-range: 192.168.0.0/16,10.0.0.0/8
-    kubectl.kubernetes.io/last-applied-configuration: >
-      {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{"field.cattle.io/publicEndpoints":"[{\"addresses\":[\"192.168.0.11\",\"192.168.0.6\",\"192.168.0.8\"],\"port\":80,\"protocol\":\"HTTP\",\"serviceName\":\"iobroker:iobroker-ingress-svc\",\"ingressName\":\"iobroker:iobroker-ingress\",\"hostname\":\"linux-2.fritz.box\",\"path\":\"/\",\"allNodes\":false},{\"addresses\":[\"192.168.0.11\",\"192.168.0.6\",\"192.168.0.8\"],\"port\":80,\"protocol\":\"HTTP\",\"serviceName\":\"iobroker:iobroker-ingress-svc\",\"ingressName\":\"iobroker:iobroker-ingress\"linux-2.fritz.box,\"hostname\":\"\",\"path\":\"/iqontrol\",\"allNodes\":false}]","ingress.kubernetes.io/whitelist-source-range":"192.168.0.0/16,10.0.0.0/8","meta.helm.sh/release-name":"iobroker","meta.helm.sh/release-namespace":"default","nginx.ingress.kubernetes.io/rewrite-target":"/","nginx.ingress.kubernetes.io/ssl-redirect":"true","objectset.rio.cattle.io/id":"default-iobroker-cattle-fleet-local-system"},"creationTimestamp":"2025-03-09T21:32:51Z","generation":15,"labels":{"app.kubernetes.io/managed-by":"Helm","objectset.rio.cattle.io/hash":"b49a838027d4604797930aa9424971cc9bcb5336"},"managedFields":[{"apiVersion":"networking.k8s.io/v1","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:loadBalancer":{"f:ingress":{}}}},"manager":"traefik","operation":"Update","subresource":"status","time":"2025-03-09T21:32:51Z"},{"apiVersion":"networking.k8s.io/v1","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:annotations":{".":{},"f:ingress.kubernetes.io/whitelist-source-range":{},"f:meta.helm.sh/release-name":{},"f:meta.helm.sh/release-namespace":{},"f:nginx.ingress.kubernetes.io/rewrite-target":{},"f:nginx.ingress.kubernetes.io/ssl-redirect":{},"f:objectset.rio.cattle.io/id":{}},"f:labels":{".":{},"f:app.kubernetes.io/managed-by":{},"f:objectset.rio.cattle.io/hash":{}}}},"manager":"fleetagent","operation":"Update","time":"2025-03-09T21:59:23Z"},{"apiVersion":"networking.k8s.io/v1","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:annotations":{"f:field.cattle.io/publicEndpoints":{}}},"f:spec":{"f:rules":{}}},"manager":"rancher","operation":"Update","time":"2025-03-09T22:15:43Z"}],"name":"iobroker-ingress","namespace":"iobroker","resourceVersion":"11437920","uid":"a90666a5-4e5b-4838-a239-0dd5bb1dfa44"},"spec":{"rules":[{"host":"linux-2","http":{"paths":[{"backend":{"service":{"name":"iobroker-ingress-svc","port":{"number":8081}}},"path":"/","pathType":"Prefix"},{"backend":{"service":{"name":"iobroker-ingress-svc","port":{"number":8082}}},"path":"/iqontrol","pathType":"Prefix"}]}}]}}
+apiVersion: networking.k8s.io/v1                                                                                        kind: Ingress                                                                                                           metadata:                                                                                                                 annotations:                                                                                                              field.cattle.io/publicEndpoints: >-                                                                                       [{"addresses":["192.168.0.11","192.168.0.6","192.168.0.8"],"port":80,"protocol":"HTTP","serviceName":"iobroker:io>    ingress.kubernetes.io/whitelist-source-range: 192.168.0.0/16,10.0.0.0/8
     meta.helm.sh/release-name: iobroker
-    meta.helm.sh/release-namespace: default
+    meta.helm.sh/release-namespace: iobroker
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/ssl-redirect: 'true'
     objectset.rio.cattle.io/id: default-iobroker-cattle-fleet-local-system
-  creationTimestamp: '2025-03-09T22:18:37Z'
-  generation: 3
   labels:
     app.kubernetes.io/managed-by: Helm
     objectset.rio.cattle.io/hash: b49a838027d4604797930aa9424971cc9bcb5336
-  managedFields:
-    - apiVersion: networking.k8s.io/v1
-      fieldsType: FieldsV1
-      fieldsV1:
-        f:metadata:
-          f:annotations:
-            .: {}
-            f:ingress.kubernetes.io/whitelist-source-range: {}
-            f:kubectl.kubernetes.io/last-applied-configuration: {}
-            f:meta.helm.sh/release-name: {}
-            f:meta.helm.sh/release-namespace: {}
-            f:nginx.ingress.kubernetes.io/rewrite-target: {}
-            f:nginx.ingress.kubernetes.io/ssl-redirect: {}
-            f:objectset.rio.cattle.io/id: {}
-          f:labels:
-            .: {}
-            f:app.kubernetes.io/managed-by: {}
-            f:objectset.rio.cattle.io/hash: {}
-      manager: kubectl-client-side-apply
-      operation: Update
-      time: '2025-03-09T22:18:37Z'
+      managedFields:
     - apiVersion: networking.k8s.io/v1
       fieldsType: FieldsV1
       fieldsV1:
@@ -47,8 +17,27 @@ metadata:
       manager: traefik
       operation: Update
       subresource: status
-      time: '2025-03-09T22:18:37Z'
+      time: '2025-03-09T21:32:51Z'
     - apiVersion: networking.k8s.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:ingress.kubernetes.io/whitelist-source-range: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+            f:nginx.ingress.kubernetes.io/rewrite-target: {}
+            f:nginx.ingress.kubernetes.io/ssl-redirect: {}
+            f:objectset.rio.cattle.io/id: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:objectset.rio.cattle.io/hash: {}
+      manager: fleetagent
+      operation: Update
+      time: '2025-03-09T21:59:23Z'
+         - apiVersion: networking.k8s.io/v1
       fieldsType: FieldsV1
       fieldsV1:
         f:metadata:
@@ -56,16 +45,10 @@ metadata:
             f:field.cattle.io/publicEndpoints: {}
         f:spec:
           f:rules: {}
-          f:tls: {}
       manager: rancher
-      operation: Update
-      time: '2025-03-09T22:34:49Z'
   name: iobroker-ingress
   namespace: iobroker
-  resourceVersion: '11444822'
-  uid: 928cd34c-6456-4b10-a6f5-933400552643
 spec:
-  ingressClassName: traefik
   rules:
     - host: linux-2.fritz.box
       http:
@@ -77,7 +60,7 @@ spec:
                   number: 8081
             path: /
             pathType: Prefix
-          - backend:
+                      - backend:
               service:
                 name: iobroker-ingress-svc
                 port:
@@ -86,11 +69,5 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - linux-2.fritz-box
+        - linux-2.fritz.box
       secretName: iobroker-tls
-status:
-  loadBalancer:
-    ingress:
-      - ip: 192.168.0.11
-      - ip: 192.168.0.6
-      - ip: 192.168.0.8
