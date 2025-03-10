@@ -1,17 +1,17 @@
-apiVersion: networking.k8s.io/v1  
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-annotations:
+  name: iobroker-ingress
+  namespace: iobroker
+  annotations:
     cert-manager.io/cluster-issuer: "selfsigned-issuer"
-    kubernetes.io/ingress.class: "traefik"
     meta.helm.sh/release-name: iobroker
     meta.helm.sh/release-namespace: iobroker
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16,10.0.0.0/8"
-name: iobroker-ingress
-namespace: iobroker
 spec:
+  ingressClassName: traefik
   rules:
     - host: linux-2.fritz.box
       http:
@@ -23,7 +23,7 @@ spec:
                   number: 8081
             path: /
             pathType: Prefix
-        - backend:
+          - backend:
               service:
                 name: iobroker-ingress-svc
                 port:
