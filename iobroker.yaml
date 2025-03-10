@@ -105,25 +105,3 @@ spec:
 ---
 
 
-# ------------------- Ingress ------------------- #
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: iobroker-ingress
-  namespace: iobroker
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16,10.0.0.0/8"
-spec:
-  rules:
-  - host: linux-2
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: iobroker-svc
-            port:
-              number: 30081
