@@ -2,6 +2,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
 annotations:
+    cert-manager.io/cluster-issuer: "selfsigned-issuer"
+    kubernetes.io/ingress.class: "traefik"
     meta.helm.sh/release-name: iobroker
     meta.helm.sh/release-namespace: iobroker
     nginx.ingress.kubernetes.io/rewrite-target: /
