@@ -6,7 +6,6 @@ annotations:
     meta.helm.sh/release-namespace: iobroker
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/ssl-redirect: 'true'
-    objectset.rio.cattle.io/id: default-iobroker-cattle-fleet-local-system
   labels:
     app.kubernetes.io/managed-by: Helm
       managedFields:
