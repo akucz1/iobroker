@@ -6,20 +6,8 @@ annotations:
     meta.helm.sh/release-namespace: iobroker
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/ssl-redirect: 'true'
-  labels:
-    app.kubernetes.io/managed-by: Helm
-      managedFields:
-    - apiVersion: networking.k8s.io/v1
-      fieldsType: FieldsV1
-      fieldsV1:
-        f:status:
-          f:loadBalancer:
-            f:ingress: {}
-      manager: traefik
-    - apiVersion: networking.k8s.io/v1
-      manager: rancher
-  name: iobroker-ingress
-  namespace: iobroker
+name: iobroker-ingress
+namespace: iobroker
 spec:
   rules:
     - host: linux-2.fritz.box
